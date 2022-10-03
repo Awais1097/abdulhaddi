@@ -217,15 +217,15 @@ function startWebRTC(isOfferer) {
 
     // Listen to signaling data from Scaledrone
     room.on('data', (message, client) => {
-        console.log('message', message);
-        console.log('client', client);
-        if (message.text) {
-            if (client) {
-                msgs.push(message);
-                addMessageToListDOM(message, client);
-                return;
-            }
-        } //else {
+     //   console.log('message', message);
+      //  console.log('client', client);
+     //   if (message.text) {
+      //      if (client) {
+       //         msgs.push(message);
+       //         addMessageToListDOM(message, client);
+      //          return;
+        //    }
+       // } //else {
             // Message was sent by us
             if (client.id === drone.clientId) {
                 return;
