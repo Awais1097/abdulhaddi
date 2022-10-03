@@ -54,18 +54,18 @@ function connection() {
             updateMembersDOM();
         });
     room.on('data', (message, client) => {
-     console.log('message', message);
-     console.log('client', client );
-	 if (message.text) {
-		if (client) {
- 		msgs.push(message);
-                addMessageToListDOM(message, client);
-		}
-            } else {
-                // Message is from server
-            }
+//      console.log('message', message);
+//      console.log('client', client );
+// 	 if (message.text) {
+// 		if (client) {
+//  		msgs.push(message);
+//                 addMessageToListDOM(message, client);
+// 		}
+//             } else {
+//                 // Message is from server
+//             }
     
-  });
+//   });
 
       //  room.on('data', (text, member) => {
          //   messages.push(text.toString() + member.toString());
@@ -216,6 +216,16 @@ function startWebRTC(isOfferer) {
   
   // Listen to signaling data from Scaledrone
   room.on('data', (message, client) => {
+     console.log('message', message);
+     console.log('client', client );
+	 if (message.text) {
+		if (client) {
+ 		msgs.push(message);
+                addMessageToListDOM(message, client);
+		}
+            } else {
+                // Message is from server
+            }
     // Message was sent by us
     if (client.id === drone.clientId) {
       return;
