@@ -1,32 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
-
-@Awais1097
-Awais1097
-    /
-    abdulhaddi
-Public template
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-abdulhaddi / script.js /
-@Awais1097
-Awais1097 Update script.js
-…
-Latest commit d78930c 1 minute ago
-History
-1 contributor
-307 lines(266 sloc)  9.14 KB
 
 // Generate random room name if needed
 if (!location.hash) {
