@@ -218,20 +218,12 @@ function startWebRTC(isOfferer) {
   room.on('data', (message, client) => {
      console.log('message', message);
      console.log('client', client );
-	 if (message.text) {
-		if (client) {
- 		msgs.push(message);
-                addMessageToListDOM(message, client);
-		}
-            } else {
-                // Message is from server
-            }
-    // Message was sent by us
+  
+    if (message.sdp) {
+	     // Message was sent by us
     if (client.id === drone.clientId) {
       return;
     }
-  
-    if (message.sdp) {
       // This is called after receiving an offer or answer from another peer
       pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
         // When receiving an offer lets answer it
@@ -240,11 +232,22 @@ function startWebRTC(isOfferer) {
         }
       }, onError);
     } else if (message.candidate) {
+	     // Message was sent by us
+    if (client.id === drone.clientId) {
+      return;
+    }
       // Add the new ICE candidate to our connections remote description
       pc.addIceCandidate(
         new RTCIceCandidate(message.candidate), onSuccess, onError
       );
-    } 
+    } else if (message.text) {
+		if (client) {
+ 		msgs.push(message);
+                addMessageToListDOM(message, client);
+		}
+            } else {
+                // Message is from server
+            }
   });
 }
   
