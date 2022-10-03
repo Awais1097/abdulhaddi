@@ -223,8 +223,9 @@ function startWebRTC(isOfferer) {
             if (client) {
                 msgs.push(message);
                 addMessageToListDOM(message, client);
+                return;
             }
-        } else {
+        } //else {
             // Message was sent by us
             if (client.id === drone.clientId) {
                 return;
@@ -243,7 +244,7 @@ function startWebRTC(isOfferer) {
                     new RTCIceCandidate(message.candidate), onSuccess, onError
                 );
             }
-        }
+        //}
 
         
     });
