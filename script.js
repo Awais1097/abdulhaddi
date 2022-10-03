@@ -53,19 +53,19 @@ function connection() {
             members.splice(index, 1);
             updateMembersDOM();
         });
-    room.on('data', (message, client) => {
-     console.log('message', message);
-     console.log('client', client );
-	 if (message.text) {
-		if (client) {
- 		msgs.push(message);
-                addMessageToListDOM(message, client);
-		}
-            } else {
-                // Message is from server
-            }
+//     room.on('data', (message, client) => {
+//      console.log('message', message);
+//      console.log('client', client );
+// 	 if (message.text) {
+// 		if (client) {
+//  		msgs.push(message);
+//                 addMessageToListDOM(message, client);
+// 		}
+//             } else {
+//                 // Message is from server
+//             }
     
-    });
+//     });
 
       //  room.on('data', (text, member) => {
          //   messages.push(text.toString() + member.toString());
