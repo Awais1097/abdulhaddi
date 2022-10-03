@@ -53,7 +53,7 @@ function connection() {
             members.splice(index, 1);
             updateMembersDOM();
         });
-    room.on('data', (message, client) => {
+ //   room.on('data', (message, client) => {
 //      console.log('message', message);
 //      console.log('client', client );
 // 	 if (message.text) {
