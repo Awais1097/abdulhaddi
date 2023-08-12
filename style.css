@@ -328,6 +328,7 @@ body.dark .btn-close-right {
   flex-direction: column;
   align-items: center;
 }
+
 .video-call-wrapper {
   width: 100%;
   height: 100%;
@@ -336,25 +337,23 @@ body.dark .btn-close-right {
   display: flex;
   flex-wrap: wrap;
 }
+
 .video-participant {
   width: 50%;
   height: 100%;
   position: relative;
 }
-.video-participant img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 
+.video-participant video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width of parent */
+  height: 100%; /* Full height of parent */
+  object-fit: cover; /* Maintain aspect ratio */
+  background-color: var(--message-bg);
 }
-    .video-participant video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: var(--message-bg)
-    }
+
 .name-tag {
   position: absolute;
   top: 12px;
@@ -365,6 +364,15 @@ body.dark .btn-close-right {
   border-radius: 4px;
   padding: 4px 12px;
 }
+
+/* Adjust the size and position of the local video */
+#localVideo {
+  width: 30%; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  bottom: 12px; /* Adjust the vertical position */
+  right: 12px; /* Adjust the horizontal position */
+}
+
 .participant-actions {
   position: absolute;
   display: flex;
@@ -633,27 +641,6 @@ body.dark .btn-close-right {
   outline: none;
   cursor: pointer;
   display: none;
-}
-
-@media (max-width: 768px) {
-  .app-container {
-    flex-direction: column; /* Stack elements vertically */
-  }
-  
-  .right-side {
-    margin-top: 16px; /* Add some spacing from the top */
-    flex-basis: auto; /* Let it grow as needed */
-    padding: 0; /* Reduce padding */
-  }
-  
-  .video-call-wrapper {
-    flex-direction: column; /* Stack video participants vertically */
-  }
-  
-  .video-participant {
-    width: 100%; /* Take up full width */
-    height: auto; /* Adjust height based on content */
-  }
 }
 
 
