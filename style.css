@@ -707,6 +707,6 @@ body.dark .btn-close-right {
 @media screen and (max-width: 520px) and (max-width: 720px) {
   .video-participant {
     width: 100%; /* Full width for smaller screens */
-    height: 50%; /* Half the height for smaller screens */
+    height: 100%; /* Half the height for smaller screens */
   }
 }
