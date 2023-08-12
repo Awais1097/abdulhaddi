@@ -372,7 +372,6 @@ body.dark .btn-close-right {
   bottom: 12px; /* Adjust the vertical position */
   right: 12px; /* Adjust the horizontal position */
 }
-
 .participant-actions {
   position: absolute;
   display: flex;
@@ -707,7 +706,7 @@ body.dark .btn-close-right {
 /*==================== Devices Between 520px - 720px ====================*/
 @media screen and (max-width: 520px) and (max-width: 720px) {
   .video-participant {
-    width: 50%;
-    height: 33.3%;
+    width: 100%; /* Full width for smaller screens */
+    height: 50%; /* Half the height for smaller screens */
   }
 }
