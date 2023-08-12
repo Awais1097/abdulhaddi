@@ -336,11 +336,12 @@ body.dark .btn-close-right {
   overflow: hidden;
   display: flex;
   flex-wrap: wrap;
+  position: relative; /* Added position relative for positioning the local video */
 }
 
 .video-participant {
-  width: 50%;
-  height: 100%;
+  width: 100%; /* Full width for both remote and local participants */
+  height: 100%; /* Full height for both remote and local participants */
   position: relative;
 }
 
@@ -348,9 +349,9 @@ body.dark .btn-close-right {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%; /* Full width of parent */
-  height: 100%; /* Full height of parent */
-  object-fit: cover; /* Maintain aspect ratio */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   background-color: var(--message-bg);
 }
 
@@ -365,12 +366,13 @@ body.dark .btn-close-right {
   padding: 4px 12px;
 }
 
-/* Adjust the size and position of the local video */
-#localVideo {
-  width: 30%; /* Adjust the width as needed */
+/* Position the local video within the remote video */
+.local-participant {
+  width: 30%; /* Adjust the width of the local video */
   height: auto; /* Maintain aspect ratio */
   bottom: 12px; /* Adjust the vertical position */
   right: 12px; /* Adjust the horizontal position */
+  z-index: 1; /* Make sure the local video is above the remote video */
 }
 .participant-actions {
   position: absolute;
@@ -706,7 +708,6 @@ body.dark .btn-close-right {
 /*==================== Devices Between 520px - 720px ====================*/
 @media screen and (max-width: 520px) and (max-width: 720px) {
   .video-participant {
-    width: 100%; /* Full width for smaller screens */
-    height: 100%; /* Half the height for smaller screens */
+    height: 50%;
   }
 }
