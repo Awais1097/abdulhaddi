@@ -634,6 +634,29 @@ body.dark .btn-close-right {
   cursor: pointer;
   display: none;
 }
+
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column; /* Stack elements vertically */
+  }
+  
+  .right-side {
+    margin-top: 16px; /* Add some spacing from the top */
+    flex-basis: auto; /* Let it grow as needed */
+    padding: 0; /* Reduce padding */
+  }
+  
+  .video-call-wrapper {
+    flex-direction: column; /* Stack video participants vertically */
+  }
+  
+  .video-participant {
+    width: 100%; /* Take up full width */
+    height: auto; /* Adjust height based on content */
+  }
+}
+
+
 /*==================== MEDIA QUERIES ====================*/
 
 /*==================== Devices smaller than 900px ====================*/
