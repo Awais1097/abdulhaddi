@@ -77,7 +77,25 @@
                 </button>
             </div>
         </div>
+		
+		<div class="app-main">
+    <div class="video-call-wrapper">
+        <!-- Video Participant 1 (Remote) -->
+        <div class="video-participant remote-participant">
+            <video id="remoteVideo" controls autoplay poster="poster.png"></video>
+            <a href="#" class="name-tag" id="remote-name">REMOTE</a>
+        </div>
+        
+        <!-- Video Participant 2 (Local within Remote) -->
+        <div class="video-participant local-participant">
+            <video id="localVideo" controls autoplay muted poster="poster.png"></video>
+            <a href="#" class="name-tag" id="local-name">LOCAL</a>
+        </div>
+    </div>
+</div>
 
+		
+		<!--
         <div class="app-main">
             <div class="video-call-wrapper">
                 <!-- Video Participant 1 -->
@@ -115,7 +133,7 @@
           </button>
         </div>-->
 
-        </div>
+        </div>-->
 
         <!-- Right Side -->
         <div class="right-side">
