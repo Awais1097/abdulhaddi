@@ -2,7 +2,16 @@
 if (!location.hash) {
     location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
 }
-const roomHash = location.hash.substring(1);
+
+
+
+// Get the URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+
+// Get the value of the 'roomHash' parameter
+const roomHash = urlParams.get('roomHash');
+
+console.log(roomHash);
 const roomName = 'observable-' + roomHash;
 
 // TODO: Replace with your own channel ID
