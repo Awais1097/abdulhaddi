@@ -12,6 +12,10 @@ let msgs = [];
 let room;
 let pc;
 
+function setName(n){
+    document.getElementById("room-input").value = n; 
+}
+
 function connection() {
     document.getElementById("room-switch").style.visibility = 'hidden';
     document.getElementById("room-button").style.visibility = 'hidden';
