@@ -381,13 +381,13 @@ body.dark .btn-close-right {
   height: 100vh;
 }
 
-#main-video-element {
+#remoteVideo {
   width: 100%;
   height: 100%;
   object-fit: cover; /* Adjust video display mode */
 }
 
-.small-box {
+.participant-action-local {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -398,7 +398,7 @@ body.dark .btn-close-right {
   overflow: hidden;
 }
 
-#small-box-video-element {
+#localVideo {
   width: 100%;
   height: auto;
   object-fit: cover; /* Adjust video display mode */
