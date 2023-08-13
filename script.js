@@ -16,7 +16,7 @@ const userName = urlParams.get('name');
 console.log(roomHash);
 const roomName = 'observable-' + roomHash;
 
-document.getElementById("room-input").value = userName;
+
 // TODO: Replace with your own channel ID
 var drone;
 let members = [];
@@ -24,12 +24,14 @@ let msgs = [];
 let room;
 let pc;
 
-connection();
+
 function setName(n){
     document.getElementById("room-input").value = n; 
 }
 
    document.addEventListener('DOMContentLoaded', function() {
+       document.getElementById("room-input").value = userName;
+       connection();
             // Check for getUserMedia support
             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 // Request camera and microphone access
