@@ -390,6 +390,12 @@ body.dark .btn-close-right {
   position: relative;
 }
 
+.video-participant-local {
+  width: 50%;
+  height: 100%;
+  position: relative;
+} 
+
 .video-participant video {
   position: absolute;
   top: 0;
@@ -409,14 +415,6 @@ body.dark .btn-close-right {
   background-color: rgba(0, 15, 47, 0.5);
   border-radius: 4px;
   padding: 4px 12px;
-}
-
-/* Adjust the size and position of the local video */
-#localVideo {
-  width: 30%; /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
-  bottom: 12px; /* Adjust the vertical position */
-  right: 12px; /* Adjust the horizontal position */
 }
 
 .participant-actions {
@@ -756,6 +754,12 @@ body.dark .btn-close-right {
   }*/
 .video-participant {
     width: 100%; /* Full width for smaller screens */
-    height: 50%; /* Half the height for smaller screens */
+    height: 70%; /* Half the height for smaller screens */
+  }
+
+  
+.video-participant-local {
+    width: 100%; /* Full width for smaller screens */
+    height: 30%; /* Half the height for smaller screens */
   }
 }
