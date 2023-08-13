@@ -11,9 +11,12 @@ const urlParams = new URLSearchParams(window.location.search);
 // Get the value of the 'roomHash' parameter
 const roomHash = urlParams.get('roomHash');
 
+const userName = urlParams.get('name');
+
 console.log(roomHash);
 const roomName = 'observable-' + roomHash;
 
+document.getElementById("room-input").value = userName;
 // TODO: Replace with your own channel ID
 var drone;
 let members = [];
@@ -21,6 +24,7 @@ let msgs = [];
 let room;
 let pc;
 
+connection();
 function setName(n){
     document.getElementById("room-input").value = n; 
 }
