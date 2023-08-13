@@ -412,7 +412,7 @@ body.dark .btn-close-right {
   display: flex;
   flex-wrap: wrap;
 }
-
+ /*
 .video-participant {
   width: 50%;
   height: 100%;
@@ -423,7 +423,7 @@ body.dark .btn-close-right {
   width: 50%;
   height: 100%;
   position: relative;
-} 
+}  */
 
 .video-participant video {
   position: absolute;
