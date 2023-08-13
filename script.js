@@ -16,6 +16,23 @@ function setName(n){
     document.getElementById("room-input").value = n; 
 }
 
+   document.addEventListener('DOMContentLoaded', function() {
+            // Check for getUserMedia support
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                // Request camera and microphone access
+                navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+                    .then(function(stream) {
+                        const videoElement = document.getElementById('video-element');
+                        videoElement.srcObject = stream;
+                    })
+                    .catch(function(error) {
+                        console.error('Error accessing media:', error);
+                    });
+            } else {
+                console.error('getUserMedia is not supported in this browser.');
+            }
+        });
+
 function connection() {
     document.getElementById("room-switch").style.visibility = 'hidden';
     document.getElementById("room-button").style.visibility = 'hidden';
