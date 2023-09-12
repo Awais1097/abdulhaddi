@@ -1,9 +1,7 @@
 // Generate random room name if needed
-//if (!location.hash) {
- //   location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
-//}
-
-
+// if (!location.hash) {
+//    location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+// }
 
 // Get the URL parameters
 const urlParams = new URLSearchParams(window.location.search);
@@ -16,7 +14,6 @@ const userName = urlParams.get('name');
 console.log(roomHash);
 const roomName = 'observable-' + roomHash;
 
-
 // TODO: Replace with your own channel ID
 var drone;
 let members = [];
@@ -24,35 +21,38 @@ let msgs = [];
 let room;
 let pc;
 
-
-function setName(n){
-    document.getElementById("room-input").value = n; 
+function setName(n) {
+    document.getElementById("room-input").value = n;
 }
 
-   document.addEventListener('DOMContentLoaded', function() {
-       document.getElementById("room-input").value = userName;
-       connection();
-            // Check for getUserMedia support
-            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                // Request camera and microphone access
-                navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-                    .then(function(stream) {
-                        const videoElement = document.getElementById('video-element');
-                        videoElement.srcObject = stream;
-                    })
-                    .catch(function(error) {
-                        console.error('Error accessing media:', error);
-                    });
-            } else {
-                console.error('getUserMedia is not supported in this browser.');
-            }
-        });
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById("room-input").value = userName;
+    connection();
+});
+
+// Function to request camera and microphone access
+function requestMediaPermissions() {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        // Request camera and microphone access
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(function (stream) {
+                const videoElement = document.getElementById('video-element');
+                videoElement.srcObject = stream;
+            })
+            .catch(function (error) {
+                console.error('Error accessing media:', error);
+            });
+    } else {
+        console.error('getUserMedia is not supported in this browser.');
+    }
+}
 
 function connection() {
     document.getElementById("room-switch").style.visibility = 'hidden';
     document.getElementById("room-button").style.visibility = 'hidden';
     drone = new ScaleDrone('W0qVprhBjTQ5YXlA', {
-        data: { // Will be sent out as clientData via events
+        data: {
+            // Will be sent out as clientData via events
             name: document.getElementById("room-input").value,
             color: getRandomColor(),
         },
@@ -73,7 +73,7 @@ function connection() {
         room.on('members', m => {
             console.log('MEMBERS', m);
             members = m;
-            // If we are the second user to connect to the room we will be creating the offer
+            // If we are the second user to connect to the room, we will be creating the offer
             const isOfferer = members.length === 2;
             startWebRTC(isOfferer);
             updateMembersDOM();
@@ -89,32 +89,20 @@ function connection() {
             members.splice(index, 1);
             updateMembersDOM();
         });
-             room.on('data', (message, client) => {
-             console.log('message', message);
-              console.log('client', client );
-         	 if (message.text) {
-         		if (client) {
-          		msgs.push(message);
-                         addMessageToListDOM(message, client);
-        		}
-                     } else {
-                         // Message is from server
-                     }
 
-             });
-
-        //  room.on('data', (text, member) => {
-        //   messages.push(text.toString() + member.toString());
-        //   console.log(text, member);
-        //  if (member) {
-        //      addMessageToListDOM(text, member);
-        // } else {
-        // Message is from server
-        //   }
-        //});
-
+        room.on('data', (message, client) => {
+            console.log('message', message);
+            console.log('client', client);
+            if (message.text) {
+                if (client) {
+                    msgs.push(message);
+                    addMessageToListDOM(message, client);
+                }
+            } else {
+                // Message is from the server
+            }
+        });
     });
-
 }
 
 const DOM = {
@@ -123,22 +111,18 @@ const DOM = {
     input: document.querySelector('.chat-input'),
 };
 
-
 function updateMembersDOM() {
     DOM.membersList.innerHTML = '';
     members.forEach(member =>
         DOM.membersList.appendChild(createMemberElement(member))
     );
-    // DOM.membersList.appendChild(createMemberElementCount(members.length + ''));
 }
-
 
 function createMemberElement(member) {
     const { name, color } = member.clientData;
     const el = document.createElement('a');
-    el.textContent = name;//appendChild(document.createTextNode(name));
+    el.textContent = name;
     el.className = 'participant-more';
-    // el.style.color = color;
     if (member.id === drone.clientId) {
         document.getElementById("local-name").textContent = name;
     } else {
@@ -147,21 +131,13 @@ function createMemberElement(member) {
     return el;
 }
 
-function createMemberElementCount(member) {
-    const el = document.createElement('a');
-    el.textContent = member;//appendChild(document.createTextNode(member));
-    el.className = 'participant-more';
-    return el;
-}
-
-
 function addMessageToListDOM(text, client) {
     const el = DOM.messages;
     el.appendChild(createMessageElement(text, client));
     const wasTop = el.scrollTop === el.scrollHeight - el.clientHeight;
-    // if (wasTop) {
-    el.scrollTop = el.scrollHeight;
-    // }
+    if (wasTop) {
+        el.scrollTop = el.scrollHeight;
+    }
 }
 
 function createMessageElement(text, client) {
@@ -187,7 +163,6 @@ function createMessageElement(text, client) {
         el.className = 'message-wrapper';
         return el;
     }
-
 }
 
 // Room name needs to be prefixed with 'observable-'
@@ -197,25 +172,20 @@ const configuration = {
     }]
 };
 
-
-
-function onSuccess() { };
+function onSuccess() { }
 function onError(error) {
     console.error(error);
-};
-
+}
 
 // Send signaling data via Scaledrone
 function sendMessage(message) {
     console.log('message', message);
-
     drone.publish({
         room: roomName,
         message
     });
     document.getElementById("chat-input").value = '';
 }
-//DOM.form.addEventListener('submit', sendMessage());
 
 function startWebRTC(isOfferer) {
     pc = new RTCPeerConnection(configuration);
@@ -228,27 +198,20 @@ function startWebRTC(isOfferer) {
         }
     };
 
-    // If user is offerer let the 'negotiationneeded' event create the offer
+    // If the user is an offerer, let the 'negotiationneeded' event create the offer
     if (isOfferer) {
         pc.onnegotiationneeded = () => {
             pc.createOffer().then(localDescCreated).catch(onError);
         }
     }
 
-    // When a remote stream arrives display it in the #remoteVideo element
+    // When a remote stream arrives, display it in the #remoteVideo element
     pc.onaddstream = event => {
         remoteVideo.srcObject = event.stream;
     };
 
-    navigator.mediaDevices.getUserMedia({
-        audio: true,
-        video: true,
-    }).then(stream => {
-        // Display your local video in #localVideo element
-        localVideo.srcObject = stream;
-        // Add your stream to be sent to the conneting peer
-        pc.addStream(stream);
-    }, onError);
+    // Request camera and microphone access
+    requestMediaPermissions();
 
     // Listen to signaling data from Scaledrone
     room.on('data', (message, client) => {
@@ -260,13 +223,13 @@ function startWebRTC(isOfferer) {
         if (message.sdp) {
             // This is called after receiving an offer or answer from another peer
             pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
-                // When receiving an offer lets answer it
+                // When receiving an offer, let's answer it
                 if (pc.remoteDescription.type === 'offer') {
                     pc.createAnswer().then(localDescCreated).catch(onError);
                 }
             }, onError);
         } else if (message.candidate) {
-            // Add the new ICE candidate to our connections remote description
+            // Add the new ICE candidate to our connection's remote description
             pc.addIceCandidate(
                 new RTCIceCandidate(message.candidate), onSuccess, onError
             );
@@ -288,7 +251,6 @@ const switchMode = document.querySelector('button.mode-switch'),
     rightSide = document.querySelector('.right-side'),
     expandBtn = document.querySelector('.expand-btn');
 videor = document.querySelector('.btn-muter');
-
 
 switchMode.addEventListener('click', () => {
     body.classList.toggle('dark');
@@ -323,7 +285,6 @@ function copy(input) {
         window.clipboardData.setData("Text", input);
     }
 }
-
 
 function getRandomColor() {
     return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
